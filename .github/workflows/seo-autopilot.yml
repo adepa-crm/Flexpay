@@ -1,0 +1,76 @@
+name: SEO Autopilot
+
+on:
+  schedule:
+    - cron: "0 9 * * 1,4" # Mondays and Thursdays at 09:00 UTC
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Optional keyword to write about (otherwise the next pending topic is used)"
+        required: false
+        default: ""
+      dry_run:
+        description: "Dry run: generate and preview only, commit nothing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-autopilot
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install generator dependencies
+        # Installed without touching package.json, so this works in any repo.
+        run: npm install --no-save --no-package-lock --no-audit --no-fund @anthropic-ai/sdk@1.9.0 marked@18.2.1
+
+      - name: Generate article
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TOPIC: ${{ github.event.inputs.topic }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          set -- scripts/generate-seo-post.mjs
+          if [ -n "$TOPIC" ]; then set -- "$@" --topic "$TOPIC"; fi
+          if [ "$DRY_RUN" = "true" ]; then set -- "$@" --dry-run; fi
+          node "$@"
+
+      - name: Commit and push to main
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          # Paths to commit come from seo-config.json, so nothing here is site-specific.
+          mapfile -t PATHS < <(node -e '
+            const c = require("./seo-config.json");
+            const p = ["seo-config.json", c.contentDirectory || "content/blog"];
+            if (c.html && c.html.enabled && c.html.outputDirectory) p.push(c.html.outputDirectory);
+            if (c.sitemap && c.sitemap.enabled && c.sitemap.path) p.push(c.sitemap.path);
+            console.log(p.join("\n"));
+          ')
+          git config user.name "seo-autopilot[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- "${PATHS[@]}"
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit."
+            exit 0
+          fi
+          TITLE=$(git diff --cached --name-only --diff-filter=A -- "${PATHS[1]}" | head -1 | xargs -r basename)
+          git commit -m "SEO autopilot: publish ${TITLE:-new article}"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

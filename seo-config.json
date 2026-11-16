@@ -1,0 +1,161 @@
+{
+  "siteName": "Adepa CRM",
+  "siteUrl": "https://optimaflexpay.com/adepa",
+  "niche": "CRM, sales pipeline and back-office software for small and medium businesses in Ghana (contacts, leads, invoicing with VAT/NHIL/GETFund, payroll with SSNIT/PAYE, mobile money payments)",
+  "targetAudience": "Owners, managers and sales leads at Ghanaian SMEs (5–100 staff) in retail, distribution, services and professional firms who currently run sales and customers on WhatsApp, Excel or paper and want something simpler and more organised",
+  "language": "en-GH",
+  "author": "Adepa Team",
+  "brandVoice": {
+    "tone": "Practical, warm and direct — like an experienced Accra business consultant explaining something over coffee",
+    "style": [
+      "Write for a busy owner: short paragraphs, concrete steps, real examples from Ghanaian business life (Makola traders, Kumasi distributors, Accra agencies)",
+      "Use Ghana cedi (GH₵) for money examples and local context (MoMo, GRA, SSNIT) where relevant",
+      "Explain jargon the first time it appears",
+      "Prefer numbered steps, checklists and small tables over long prose",
+      "Be honest about trade-offs and when a spreadsheet is genuinely enough"
+    ],
+    "avoid": [
+      "delve",
+      "dive into",
+      "in today's fast-paced world",
+      "in the ever-evolving landscape",
+      "game-changer",
+      "unlock",
+      "unleash",
+      "seamless",
+      "leverage",
+      "robust",
+      "cutting-edge",
+      "revolutionize",
+      "elevate",
+      "navigate the complexities",
+      "it's important to note",
+      "in conclusion",
+      "furthermore",
+      "moreover",
+      "harness the power",
+      "look no further",
+      "take it to the next level"
+    ],
+    "productClaims": "Adepa today offers multi-tenant workspaces, contacts/customers, leads and a sales pipeline. Invoicing (GRA VAT/levies), payroll (SSNIT/PAYE), HR and MoMo payments are on the roadmap — describe them as 'coming soon', never as available now.",
+    "factualityRules": "Never invent statistics, studies or quotes. Ghanaian tax and SSNIT rates change often: describe how they work and tell readers to confirm current rates with GRA or SSNIT rather than stating precise percentages as permanent fact."
+  },
+  "generation": {
+    "model": "claude-haiku-4-5",
+    "maxTokens": 8000,
+    "wordCount": {
+      "min": 1200,
+      "max": 1800
+    },
+    "internalLinksPerPost": {
+      "min": 2,
+      "max": 3
+    },
+    "relatedPostsToConsider": 8
+  },
+  "contentDirectory": "content/blog",
+  "fileExtension": ".md",
+  "frontmatter": {
+    "fieldNames": {
+      "title": "title",
+      "description": "description",
+      "date": "date",
+      "updated": "updated",
+      "slug": "slug",
+      "tags": "tags",
+      "author": "author",
+      "coverImage": "coverImage",
+      "summary": "summary",
+      "keyword": "keyword",
+      "draft": "draft"
+    },
+    "defaultCoverImage": "",
+    "extraFields": {}
+  },
+  "html": {
+    "enabled": true,
+    "outputDirectory": "frontend/public/blog",
+    "urlPath": "/blog",
+    "accentColor": "#0f6e56",
+    "ctaText": "Run your sales pipeline in one place — create a free Adepa workspace",
+    "ctaUrl": "/signup"
+  },
+  "sitemap": {
+    "enabled": true,
+    "path": "frontend/public/sitemap.xml",
+    "staticPages": [
+      {
+        "path": "/signup",
+        "changefreq": "monthly",
+        "priority": 0.8
+      },
+      {
+        "path": "/login",
+        "changefreq": "yearly",
+        "priority": 0.3
+      }
+    ]
+  },
+  "internalLinks": [
+    {
+      "title": "Create a free Adepa workspace",
+      "url": "/signup",
+      "description": "Sign up for Adepa CRM — set up a workspace in minutes to track customers, leads and your sales pipeline in one place. Link here when discussing tracking deals, follow-ups, or replacing a WhatsApp/Excel sales process."
+    },
+    {
+      "title": "Adepa blog",
+      "url": "/blog/",
+      "description": "Index of practical guides for running and growing a Ghanaian small business."
+    }
+  ],
+  "seedTopics": [
+    {
+      "keyword": "best crm for small business in ghana",
+      "status": "pending"
+    },
+    {
+      "keyword": "how to track sales leads in excel vs a crm",
+      "status": "pending"
+    },
+    {
+      "keyword": "how to manage customers on whatsapp business without losing leads",
+      "status": "pending"
+    },
+    {
+      "keyword": "sales pipeline stages for a small business explained",
+      "status": "pending"
+    },
+    {
+      "keyword": "how to calculate vat nhil and getfund on an invoice in ghana",
+      "status": "pending"
+    },
+    {
+      "keyword": "gra e-vat invoice requirements for small businesses",
+      "status": "pending"
+    },
+    {
+      "keyword": "how to calculate ssnit tier 1 and tier 2 contributions",
+      "status": "pending"
+    },
+    {
+      "keyword": "paye tax calculation for employees in ghana step by step",
+      "status": "pending"
+    },
+    {
+      "keyword": "how to accept mobile money payments for your business in ghana",
+      "status": "pending"
+    },
+    {
+      "keyword": "customer follow up templates for ghanaian sales teams",
+      "status": "pending"
+    },
+    {
+      "keyword": "how to reduce unpaid invoices and late payments in ghana",
+      "status": "pending"
+    },
+    {
+      "keyword": "simple payroll checklist for ghana smes",
+      "status": "pending"
+    }
+  ]
+}
